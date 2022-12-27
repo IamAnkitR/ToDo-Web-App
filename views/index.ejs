@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="./css/styles.css" rel="stylesheet"> 
-    <title>Document</title>
+    <title>To-Do Manager</title>
 </head>
 <body>
     <div class="grid grid-cols-6">
@@ -32,13 +32,8 @@
                 
             </form>
            
-            <div>
-                <%- include('todo.ejs', {title: "Overdue", data: overdue}) %>
-                <%- include('todo.ejs', {title: "Due Today", data: dueToday}) %>
-                <%- include('todo.ejs', {title: "Due Later", data: dueLater}) %>
-              
-            </div>
-           
+            <%- include("todos.ejs") %>
+      
         </div>
     </div>
     
