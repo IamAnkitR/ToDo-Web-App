@@ -16,7 +16,8 @@ app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 
 app.get('/', async (request, response)=>{
-  const allTodos = await Todo.getTodos();
+  try{
+    const allTodos = await Todo.getTodos();
   
   if (request.accepts('html')) {
     response.render('index', {
@@ -24,6 +25,10 @@ app.get('/', async (request, response)=>{
     });
   } else {
     response.json({allTodos});
+  }
+  }catch (error) {
+    console.log(error);
+    return response.status(422).json(error);
   }
 });
 
