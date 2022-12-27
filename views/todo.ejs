@@ -1,5 +1,5 @@
 <div>
-  <h5 class="text-black">Overdue [<span id="count-overdue"><%= overdue.length %></span>]</h5>
+  <h5 class="text-black inline">Overdue</h5> [<span id="count-overdue"><%= overdue.length %></span>]
   <ul class="list-none">
     <% for (let i = 0; i < overdue.length; i++) { 
       const items = overdue[i];    
@@ -20,7 +20,7 @@
       <% } %> 
       
   </ul>
-  <h5 class="text-black">Due Today [<span id="count-due-today"><%= dueToday.length %></span>]</h5>
+  <h5 class="text-black inline">Due Today</h5> [<span id="count-due-today"><%= dueToday.length %></span>]
   <ul class="list-none">
     <% for (let i = 0; i < dueToday.length; i++) { 
       const items = dueToday[i];    
@@ -41,7 +41,7 @@
       <% } %> 
       
   </ul>
-  <h5 class="text-black">Due Later [<span id="count-due-later"><%= dueLater.length %></span>]</h5>
+  <h5 class="text-black inline">Due Later</h5> [<span id="count-due-later"><%= dueLater.length %></span>]
   <ul class="list-none">
     <% for (let i = 0; i < dueLater.length; i++) { 
       const items = dueLater[i];    
