@@ -31,11 +31,7 @@
                
             
             </form>
-            <div>
-                <%- include('todo.ejs', {title: "Overdue", data: overdue}) %>
-                <%- include('todo.ejs', {title: "Due Today", data: dueToday}) %>
-                <%- include('todo.ejs', {title: "Due Later", data: dueLater}) %>
-            </div>
+             <%- include("todo.ejs") %>
           
         </div>
     </div>
