@@ -16,8 +16,9 @@ app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 
 app.get('/', async (request, response)=>{
+    try{
     const allTodos = await Todo.getTodos();
-try{  
+  
   if (request.accepts('html')) {
     response.render('index', {
       allTodos
