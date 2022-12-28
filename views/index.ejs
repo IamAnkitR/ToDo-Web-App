@@ -1,58 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>TO-DO Manager</title>
-    <link rel="stylesheet" href="./css/style.css" />
-  </head>
-  <body class="p-4">
+    <link href="./css/styles.css" rel="stylesheet"> 
+    <title>Document</title>
+    <script>
+        function updateTodo(id)
+        {
+            // console.log('/todos/${id}/markAsCompleted');
+            fetch(`/todos/${id}/markAsCompleted`, {
+                method: "put",
+                Headers: {
+                    "Content-Type":"application/json"
+                },
+            })
+            .then((res) =>
+            {
+                window.location.reload();
+            })
+            .catch((err) => console.error(err));
+        }
+        function deleteTodo(id)
+        {
+            fetch(`/todos/${id}`,{
+                method:"delete",
+                headers: {"Content-Type":"application/json"},
+            })
+            .then((res) => {
+                if(res.ok){
+                    window.location.reload();
+                }
+            })
+            .catch((err)=>console.error(err))
+        }
+    </script>
+</head>
+<body>
     <div class="grid grid-cols-6">
-      <div class="col-start-3 col-span-2"><%- include('header.ejs') %></div>
+        <div class="col-start-3 col-span-2">
+            <%- include('header.ejs') %>
+            <form action="/todos" method="post">
+                <div class="flex gap-2 py-4">
+                    <div class="flex-auto">
+                        <input type="text" name="title" placeholder="whats next?" class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm" required />
+                    </div>
+                
+                    <div class="flex-auto">
+                        <input type="date" name="dueDate" class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm leading-4">
+                    </div>
+                
+                
+                    <div class="flex-none">
+                        <button type="submit" class="bg-green-500 text-white px-5 py-2 rounded font-medium mr-2 py1.5">Add</button>
+                    </div>
+                </div>
+                
+               
+                
+            </form>
+           
+            <%- include("todos.ejs") %>
+            <!-- <%- include('footer.ejs') %> -->
+        </div>
     </div>
-
-    <form action="/todos" method="post" class="flex justify-center">
-      <div class="flex gap-2 py-4 w-2/3">
-        <div class="flex-auto w-64">
-          <input
-            type="text"
-            name="title"
-            class="border border-gray-300 text-gray-900 text-sm rounded w-full p-2"
-            placeholder="What's next?"
-            autofocus
-            required
-          />
-        </div>
-        <div class="flex-auto w-32">
-          <input
-            type="date" name="dueDate"
-            class="border border-gray-300 text-gray-900 text-sm rounded w-full p-2 leading-4"
-          />
-        </div>
-        <div class="flex-none">
-          <button
-            type="submit"
-            class="text-white bg-green-600 hover:bg-green-700 font-medium rounded text-sm px-5 py-2 mr-2 mb-2"
-          >
-            Add
-          </button>
-        </div>
-      </div>
-    </form>
-
-    <div class="mt-2">
-      <h5 style="display:inline"><id>Overdue</h5>
-      <span style="text-align:right" id='count-overdue' class="bg-gray-200 text-black px-3 py-1 rounded font-medium mr-2 mb-2">1</span>
-      <%- include('todos.ejs') %>
-      <h5 style="display:inline">Due Today</h5>
-      <span style="text-align:right" id='count-due-today' class="bg-gray-200 text-black px-3 py-1 rounded font-medium mr-2 mb-2">2</span>
-      <%- include('todos.ejs') %>
-      <h5 style="display:inline">Due Later</h5>
-      <span style="text-align:right" id='count-due-later' class="bg-gray-200 text-black px-3 py-1 rounded font-medium mr-2 mb-2">3</span>
-      <%- include('todos.ejs') %>
-    </div>
-
-    <div class="flex justify-center"><%- include('footer.ejs') %></div>
-  </body>
+    
+</body>
 </html>

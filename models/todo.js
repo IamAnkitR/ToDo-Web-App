@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 'use strict';
 const {
-  Model,
+  Model, Op
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Todo extends Model {
@@ -21,6 +21,41 @@ module.exports = (sequelize, DataTypes) => {
     static getTodos(){
       return this.findAll();
     }
+
+    static async overdue() {
+      return await Todo.findAll({
+        where: {
+          dueDate: { [Op.lt]: new Date().toLocaleDateString("en-CA") },
+        },
+      });
+    }
+
+    static async dueToday() {
+      // FILL IN HERE TO RETURN ITEMS DUE tODAY
+      return await Todo.findAll({
+        where: {
+          dueDate: { [Op.eq]: new Date().toLocaleDateString("en-CA") },
+        },
+      });
+    }
+
+    static async dueLater() {
+      // FILL IN HERE TO RETURN ITEMS DUE LATER
+      return await Todo.findAll({
+        where: {
+          dueDate: { [Op.gt]: new Date().toLocaleDateString("en-CA") },
+        },
+      });
+    }
+
+    static async remove(id) {
+      return this.destroy({
+        where: {
+          id,
+        }
+      })
+    }
+
 
     markAsCompleted() {
       return this.update({completed: true});
