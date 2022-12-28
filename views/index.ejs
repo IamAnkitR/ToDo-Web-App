@@ -12,11 +12,12 @@
       <div class="col-start-3 col-span-2"><%- include('header.ejs') %></div>
     </div>
 
-    <form class="flex justify-center">
+    <form action="/todos" method="post" class="flex justify-center">
       <div class="flex gap-2 py-4 w-2/3">
         <div class="flex-auto w-64">
           <input
             type="text"
+            name="title"
             class="border border-gray-300 text-gray-900 text-sm rounded w-full p-2"
             placeholder="What's next?"
             autofocus
@@ -25,7 +26,7 @@
         </div>
         <div class="flex-auto w-32">
           <input
-            type="date"
+            type="date" name="dueDate"
             class="border border-gray-300 text-gray-900 text-sm rounded w-full p-2 leading-4"
           />
         </div>
