@@ -121,6 +121,15 @@ app.get('/signup', (request, response) => {
 
 app.post('/users', async (request, response) => {
 
+  if (!request.body.firstName) {
+    request.flash("error", "First Name can't be blank");
+    return response.redirect("/signup");
+  }
+  if (!request.body.email) {
+    request.flash("error", "Email can't be blank");
+    return response.redirect("/signup");
+  }
+
   const encryptedPassword =await bcyrpt.hash(request.body.password, saltRounds);
   console.log(encryptedPassword);
 
@@ -172,7 +181,14 @@ app.get('/signout',(request,response, next) => {
 })
 
 app.post('/todos', connectEnsureLogin.ensureLoggedIn(),async (request, response)=>{
-  console.log('Todo List');
+  if (!request.body.title) {
+    request.flash("error", "Blank title not allowed");
+    response.redirect("/todos");
+  }
+  if (!request.body.dueDate) {
+    request.flash("error", "Blank Date not allowed");
+    response.redirect("/todos");
+  }
 
   try {
     
