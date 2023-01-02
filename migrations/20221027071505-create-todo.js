@@ -10,8 +10,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       title: {
-        type: Sequelize.STRING
-      },
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate:{
+          notNull: true,
+          len:5,
+      }
+     },
       dueDate: {
         type: Sequelize.DATEONLY
       },
