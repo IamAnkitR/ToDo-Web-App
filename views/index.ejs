@@ -53,6 +53,9 @@
     <div class="grid grid-cols-6">
         <div class="col-start-3 col-span-2">
             <%- include('header.ejs') %>
+            <p class="py-2">Welcome to the Todo Application</p>
+            <p class="py-2">New here? <a href="/signup" class="text-green-600">Sign-up now</a></p>
+            <p class="py-2">Already have an account <a href="/login" class="text-green-600">Sign in</a></p>
             <form action="/todos" method="post">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
                 <div class="flex gap-2 py-4">
@@ -64,6 +67,7 @@
                         <input type="date" name="dueDate" class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm leading-4" required>
                     </div>
                 
+                
                     <div class="flex-none">
                         <button type="submit" class="bg-green-500 text-white px-5 py-2 rounded font-medium mr-2 py1.5">Add</button>
                     </div>
@@ -72,7 +76,6 @@
                
                 
             </form>
-           
             <div>
                 <%- include('todo.ejs', {title: "Overdue", data: overdue}) %>
                 <%- include('todo.ejs', {title: "Due Today", data: dueToday}) %>
