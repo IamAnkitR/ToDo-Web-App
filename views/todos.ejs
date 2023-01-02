@@ -51,7 +51,10 @@
 <body>
     <div class="grid grid-cols-6">
         <div class="col-start-3 col-span-2">
-            <%- include('header.ejs') %>
+            <div class="text-center">
+                <%- include('header.ejs') %>
+            </div>
+            
                 <a href="/signout">signout</a>
                 <form action="/todos" method="post">
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
@@ -84,7 +87,9 @@
                     <%- include('todo.ejs', {title: "Completed Items" , data: completedItems}) %>
                 </div>
 
-
+             <div class="text-center"> 
+                <%- include('footer.ejs') %>
+             </div>
         </div>
     </div>
 

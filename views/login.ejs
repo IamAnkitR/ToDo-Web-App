@@ -12,7 +12,10 @@
 <body>
     <div class="grid grid-cols-6">
         <div class="col-start-3 col-span-2">
-            <%- include('header.ejs') %>
+            <div class="text-center">
+                <%- include('header.ejs') %>
+            </div>
+            
             <h6 class="py-6">Login to the account</h6>
             <form action="/session" method="post">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
