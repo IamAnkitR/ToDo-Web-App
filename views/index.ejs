@@ -64,7 +64,6 @@
                         <input type="date" name="dueDate" class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm leading-4" required>
                     </div>
                 
-                
                     <div class="flex-none">
                         <button type="submit" class="bg-green-500 text-white px-5 py-2 rounded font-medium mr-2 py1.5">Add</button>
                     </div>
@@ -74,8 +73,12 @@
                 
             </form>
            
-            <%- include("todos.ejs") %>
-            <!-- <%- include('footer.ejs') %> -->
+            <div>
+                <%- include('todo.ejs', {title: "Overdue", data: overdue}) %>
+                <%- include('todo.ejs', {title: "Due Today", data: dueToday}) %>
+                <%- include('todo.ejs', {title: "Due Later", data: dueLater}) %>
+                <%- include('todo.ejs', {title: "Completed Items", data: completedItems}) %>
+            </div>
         </div>
     </div>
     
