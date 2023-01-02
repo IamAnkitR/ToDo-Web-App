@@ -2,8 +2,7 @@
     "env": {
         "browser": true,
         "commonjs": true,
-        "es2021": true,
-        "jest":true
+        "es2021": true
     },
     "extends": "eslint:recommended",
     "overrides": [
@@ -12,5 +11,21 @@
         "ecmaVersion": "latest"
     },
     "rules": {
+        "indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "never"
+        ]
     }
 }
