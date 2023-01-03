@@ -13,12 +13,15 @@
 <body>
     <div class="grid grid-cols-6">
         <div class="col-start-3 col-span-2">
-            <div class="text-center"><%- include('header.ejs') %></div>
+            <div class="text-center py-3"><%- include('header.ejs') %></div>
             
             <p class="py-2">welcome to the Todo Application</p>
             <p class="py-2">New here? <a href="/signup" class="text-green-600">Sign-up now</a></p>
             <p class="py-2">Already have an account <a href="/login" class="text-green-600">Sign in</a></p> 
-            <%- include('footer.ejs') %>
+            <div class="text-center py-3">
+                <%- include('footer.ejs') %>
+            </div>
+           
         </div>
     </div>
     

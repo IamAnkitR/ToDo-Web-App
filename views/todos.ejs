@@ -51,12 +51,12 @@
 <body>
     <div class="grid grid-cols-6">
         <div class="col-start-3 col-span-2">
-            <div class="text-center">
+            <div class="text-center py-3">
                 <%- include('header.ejs') %>
-            </div>
-            
                 <a href="/signout">signout</a>
-                <form action="/todos" method="post">
+            </div>
+               <div class="border border-black">
+                 <form action="/todos" method="post">
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
                     <div class="flex gap-2 py-4">
                         <div class="flex-auto">
@@ -79,15 +79,16 @@
 
 
 
-                </form>
-                <div>
+                 </form>
+                 <div>
                     <%- include('todo.ejs', {title: "Overdue" , data: overdue}) %>
                     <%- include('todo.ejs', {title: "Due Today" , data: dueToday}) %>
                     <%- include('todo.ejs', {title: "Due Later" , data: dueLater}) %>
                     <%- include('todo.ejs', {title: "Completed Items" , data: completedItems}) %>
-                </div>
-
-             <div class="text-center"> 
+                 </div>
+               </div>
+                
+             <div class="text-center py-3"> 
                 <%- include('footer.ejs') %>
              </div>
         </div>
