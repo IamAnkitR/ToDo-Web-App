@@ -37,6 +37,7 @@
   "devDependencies": {
     "cheerio": "^1.0.0-rc.12",
     "eslint": "^8.31.0",
+    "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.6.0",
     "eslint-plugin-promise": "^6.1.1",

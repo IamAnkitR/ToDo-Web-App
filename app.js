@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-const { request, response } = require('express');
+const {request, response} = require('express');
 const express = require('express');
 const app = express();
 const csrf = require('tiny-csrf');
@@ -11,12 +11,12 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const connectEnsureLogin = require('connect-ensure-login');
 const session = require('express-session');
+const cookieSession = require('cookie-session');
 const LocalStrategy = require('passport-local');
 const bcyrpt = require('bcrypt');
 const saltRounds = 10;
 const flash = require('connect-flash');
-
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({extended: false}));
 const path = require('path');
 app.set('views',path.join(__dirname,'views'));
 app.use(flash());
@@ -26,8 +26,8 @@ app.use(bodyParser.json());
 app.use(cookieParser('ssh!!!! some secret string'));
 app.use(csrf('this_should_be_32_character_long', ['POST', 'PUT', 'DELETE']));
 
-app.use(session({
-  secret:"few things are private",
+app.use(cookieSession({
+  secret: 'few things are private',
   cookie:{
     maxAge: 24 * 60 * 60 * 1000
   }
@@ -55,20 +55,20 @@ passport.use(new LocalStrategy({
     if(result){
       return done(null,user);
     } else{
-      return done(null, false, {message: "Invalid Password"});
+      return done(null, false, {message: 'Invalid Password'});
     }
   })
   .catch((error) => {
     console.error(error);
     return done(null,false,{
-      message: "Register First"
+      message: 'Register First'
   })
 })
 }))
 
 
 passport.serializeUser((user, done)=>{
-  console.log("Serializing user in session",user.id)
+  console.log('Serializing user in session',user.id)
   done(null,user.id);
 });
 
@@ -128,12 +128,16 @@ app.get('/signup', (request, response) => {
 app.post('/users', async (request, response) => {
 
   if (!request.body.firstName) {
-    request.flash("error", "First Name can't be blank");
-    return response.redirect("/signup");
+    request.flash('error', 'First Name can not be blank');
+    return response.redirect('/signup');
   }
   if (!request.body.email) {
-    request.flash("error", "Email can't be blank");
-    return response.redirect("/signup");
+    request.flash('error', 'Email cannot be blank');
+    return response.redirect('/signup');
+  }
+  if(!request.body.password){
+    request.flash('error', 'Please add password');
+    return response.redirect('/signup');
   }
 
   const encryptedPassword =await bcyrpt.hash(request.body.password, saltRounds);
@@ -149,7 +153,7 @@ app.post('/users', async (request, response) => {
     request.login(user, (err)=> {
       if(err){
         console.log(err);
-        response.redirect("/")
+        response.redirect('/')
       }
       response.redirect('/todos');
     })
@@ -157,20 +161,19 @@ app.post('/users', async (request, response) => {
   }
   catch (error) {
     console.log(error);
-    request.flash("error", error.errors[0].message);
-    response.redirect("/signup");
+    return response.status(422).json(error);
   }
 
 });
 
 app.get('/login',(request,response)=>{
   response.render('login',{
-    title:"Login",
+    title:'Login',
     csrfToken: request.csrfToken(),
   });
 });
 
-app.post('/session',passport.authenticate('local',{
+app.post('/cookieSession',passport.authenticate('local',{
   failureRedirect: '/login',
   failureFlash: true,
 }),(request,response)=>{
@@ -190,12 +193,12 @@ app.get('/signout',(request,response, next) => {
 
 app.post('/todos', connectEnsureLogin.ensureLoggedIn(),async (request, response)=>{
   if (!request.body.title) {
-    request.flash("error", "Please add title");
-    response.redirect("/todos");
+    request.flash('error', 'Please add title');
+    response.redirect('/todos');
   }
   if (!request.body.dueDate) {
-    request.flash("error", "Please add date");
-    response.redirect("/todos");
+    request.flash('error', 'Please add date');
+    response.redirect('/todos');
   }
 
   try {
