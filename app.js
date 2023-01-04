@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const csrf = require('tiny-csrf');
 
-const { Todo, User } = require('./models');
+const {Todo, User} = require('./models');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
@@ -87,10 +87,16 @@ passport.deserializeUser((id,done) => {
 app.set('view engine', 'ejs');
 
 app.get('/', async (request, response) => {
-  response.render('index', {
-    title: 'Todo Application',
-    csrfToken: request.csrfToken(),
-  });
+  if(request.user)
+  {
+    response.redirect('/todos');
+  }
+  else{
+    response.render('index', {
+      title: 'To-do List',
+      csrfToken: request.csrfToken(),
+    });
+  }
 });
 
 app.get('/todos',connectEnsureLogin.ensureLoggedIn(), async (request, response)=>{
@@ -138,7 +144,7 @@ app.post('/users', async (request, response) => {
       firstName: request.body.firstName,
       lastName: request.body.lastName,
       email: request.body.email,
-      password: encryptedPassword
+      password: encryptedPassword,
     });
     request.login(user, (err)=> {
       if(err){
@@ -151,6 +157,8 @@ app.post('/users', async (request, response) => {
   }
   catch (error) {
     console.log(error);
+    request.flash("error", error.errors[0].message);
+    response.redirect("/signup");
   }
 
 });
@@ -182,11 +190,11 @@ app.get('/signout',(request,response, next) => {
 
 app.post('/todos', connectEnsureLogin.ensureLoggedIn(),async (request, response)=>{
   if (!request.body.title) {
-    request.flash("error", "Blank title not allowed");
+    request.flash("error", "Please add title");
     response.redirect("/todos");
   }
   if (!request.body.dueDate) {
-    request.flash("error", "Blank Date not allowed");
+    request.flash("error", "Please add date");
     response.redirect("/todos");
   }
 
@@ -219,7 +227,13 @@ app.delete('/todos/:id',connectEnsureLogin.ensureLoggedIn(), async function (req
   console.log('We have to delete a Todo with ID: ', request.params.id);
 
   const deleteFlag = await Todo.destroy({ where: { id: request.params.id, userId:request.user.id,}});
-  response.send(deleteFlag ? true : false);
+  if(deleteFlag ===0)
+  {
+    return response.send(false);
+  }
+  else{
+    response.send(true);
+  }
 });
 
 module.exports = app;
