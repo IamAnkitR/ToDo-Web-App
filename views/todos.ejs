@@ -55,7 +55,7 @@
                 <%- include('header.ejs') %>
                 <a href="/signout">signout</a>
             </div>
-               <div class="border border-black">
+               <div>
                  <form action="/todos" method="post">
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
                     <div class="flex gap-2 py-4">
