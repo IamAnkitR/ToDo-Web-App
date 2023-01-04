@@ -10,7 +10,7 @@ const cookieParser = require('cookie-parser');
 
 const passport = require('passport');
 const connectEnsureLogin = require('connect-ensure-login');
-const session = require('cookie-session');
+const session = require('express-session');
 const LocalStrategy = require('passport-local');
 const bcyrpt = require('bcrypt');
 const saltRounds = 10;
