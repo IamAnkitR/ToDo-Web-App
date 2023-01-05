@@ -15,7 +15,7 @@
             <div class="text-center">
                 <%- include('header.ejs') %>
             </div>
-            
+            <a class='text-black-700' href="/">Go Home</a>
             <h6 class="py-6">Login to the account</h6>
             <form action="/session" method="post">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>" />

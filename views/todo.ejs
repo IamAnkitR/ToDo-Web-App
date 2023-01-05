@@ -1,9 +1,11 @@
 <div> 
-  <h5 class="text-black inline">
+  <h5 class="text-black inline font-medium">
     <%= title %>
-  </h5> [<span id="count-overdue">
+  </h5> <span id="count-overdue" style="padding: 2px 10px;
+  background: #f0eeee;
+  border-radius: 6px;">
     <%= data.length %>
-  </span>]
+  </span>
   <ul class="list-none">
     <% for (let i=0; i < data.length; i++) { const items=data[i]; %>
       <li class="Todo-item">
