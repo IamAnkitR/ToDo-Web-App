@@ -51,9 +51,15 @@
 <body class="font-sans">
     <div class="grid grid-cols-6">
         <div class="col-start-3 col-span-2">
-            <div class="font-bold py-3">
+            <div class="font-bold py-3 text-center">
                 <%- include('header.ejs') %>
-                    <a href="/signout">signout</a>
+                <div class="m-2 flex flex-row justify-end">
+                    <span class="bg-red-500 border-2 rounded-lg text-white p-1 "><a href="/signout">Sign-Out</a>
+                    </span>
+                </div>    
+            </div>
+            <div>
+                <h3 class="text-center font-bold text-black">Welcome</h3>
             </div>
             <div>
                 <form action="/todos" method="post">
