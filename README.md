@@ -6,7 +6,7 @@ In this ToDo App you can--</br>
 (b). Set a date for it </br>
 (c). Mark it as complete when the task is done.</br>
 
-<b>Application Url-- https://wd-render-test-tl7m.onrender.com </b>
+<b>Application Url-- https://todo-web-app-o5sr.onrender.com </b>
 
 Here are some glimpse of the application---</br>
 
